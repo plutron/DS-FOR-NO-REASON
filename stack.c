@@ -1,35 +1,47 @@
 #include <stdio.h>
 
 
-struct stack{
-	int data[1000];
-	int counter;
+
+#define STACK_SIZE 1000
+
+struct stack {
+    int data[STACK_SIZE];
+    int counter;
 };
 
-int pop(struct stack *s){
-	if(s->counter == 0) {printf("stack is empty");return 1;}
-	s->counter --;
-	return s->data[s->counter];
-	
+int push(struct stack *s, int data) {
+    if (s->counter == STACK_SIZE) {
+        printf("Stack is full\n");
+        return 0;
+    }
+    s->data[s->counter++] = data;
+    return 1;
 }
 
-int push(struct stack *s,int data){
-	if(s->counter == 1000){printf("stack is full");return 1;}
-	s->data[s->counter] = data;
-	s->counter ++;
-	return 0;
+int pop(struct stack *s, int *data) {
+    if (s->counter == 0) {
+        printf("Stack is empty\n");
+        return 0;
+    }
+    *data = s->data[--s->counter];
+    return 1;
 }
 
-
-int main(){
+int main() {
     struct stack s;
     s.counter = 0;
 
     push(&s, 10);
     push(&s, 20);
 
-    printf("%d\n", pop(&s));
-    printf("%d\n", pop(&s));
+    int data;
 
-    
+    if (pop(&s, &data))
+        printf("%d\n", data);
+
+    if (pop(&s, &data))
+        printf("%d\n", data);
+
+    return 0;
 }
+
