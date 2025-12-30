@@ -11,7 +11,7 @@ struct queue{
 int pop(struct queue *q){
     
     if ( !q-> counter ) 
-    {printf("Queue is empty");return -1;}
+    {printf("Queue is empty\n");return -1;}
     int data = q->data[q->start];
     q->start = (q->start + 1 ) % QUEUE_SIZE;
     q->counter --;
@@ -21,7 +21,7 @@ int pop(struct queue *q){
 
 int push(struct queue *q,int data){
     if ( q-> counter == QUEUE_SIZE ) 
-    {printf("Queue is full");return 0;}
+    {printf("Queue is full\n");return 0;}
     q->counter ++;
     q->data[q->end] = data;
     q->end= (q->end + 1 ) % QUEUE_SIZE;
@@ -45,8 +45,8 @@ int main() {
     
     printf("Popped: %d\n", pop(&q)); // 10
     printf("Popped: %d\n", pop(&q)); // 20
-    printf("Popped: %d\n", pop(&q)); // 10
-    printf("Popped: %d\n", pop(&q)); // 20
+    printf("Popped: %d\n", pop(&q)); // 30
+    printf("Popped: %d\n", pop(&q)); // -1
     
     return 0;
 }
